@@ -81,31 +81,7 @@ onUnmounted(() => {
 
 <template>
   <view class="container">
-    <!-- 上方只显示天数 -->
-    <view class="title">已经过去</view>
-    <view class="clock-container">
-      <view class="flip-container">
-        <view class="flip-items" v-for="(unit, unitIndex) in daysArr" :key="'days' + unitIndex">
-          <view v-for="index in unit.max + 1" :key="index" :class="[
-            'item',
-            unit.current === index - 1 ? 'current' : '',
-            (unit.current - 1 === index - 1 || (index - 1 === unit.max && unit.current === 0)) ? 'past' : ''
-          ]">
-            <view class="up">
-              <view class="inner">{{ index - 1 }}</view>
-              <view class="shadow"></view>
-            </view>
-            <view class="down">
-              <view class="inner">{{ index - 1 }}</view>
-              <view class="shadow"></view>
-            </view>
-          </view>
-        </view>
-        <view class="unit-text">天</view>
-      </view>
-    </view>
-
-    <view class="divider"></view>
+  
 
     <!-- 下方显示完整时间 -->
     <view class="title">距离2023年12月1日已经过去</view>
@@ -207,8 +183,8 @@ onUnmounted(() => {
 
 .title {
   text-align: center;
-  font-size: 28rpx;
-  color: #333;
+  font-size: 10rpx;
+  color: #828894;
   margin-bottom: 20rpx;
   font-weight: bold;
 }
@@ -234,7 +210,7 @@ onUnmounted(() => {
   font-weight: bold;
   border-radius: 6rpx;
   border: 1rpx solid rgba(121, 121, 121, 0.384);
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2rpx 12rpx #d2d2e8;
 }
 
 .horizontal {
@@ -291,13 +267,13 @@ onUnmounted(() => {
   position: absolute;
   width: 100%;
   height: 60rpx;
-  color: #252525;
+  color: #e494a5;
   left: 0;
   line-height: 60rpx;
   text-align: center;
-  text-shadow: 0 2rpx 4rpx rgb(0, 0, 0);
+  text-shadow: 0 2rpx 4rpx #e494a5;
   border-radius: 8rpx;
-  background-color: #55e3e3;
+  background-color: #d2d2e8;
 }
 
 .up .inner {
@@ -353,9 +329,11 @@ onUnmounted(() => {
 
 .unit-text {
   font-size: 24rpx;
-  color: #333;
+  color: #828894;
   margin: 0 5rpx;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
 @keyframes flip-current-down {
@@ -420,7 +398,7 @@ onUnmounted(() => {
 
 .flip-container .flip-items:nth-child(2),
 .flip-container .flip-items:nth-child(4) {
-  margin-right: 16rpx;
+  /* margin-right: 16rpx; */
 }
 
 /* 上方天数的样式 */
@@ -452,7 +430,7 @@ onUnmounted(() => {
 
 /* 专门调整上方数字间距 */
 .clock-container:first-child .flip-items:not(:last-child) {
-  margin-right: 4rpx;
+  /* margin-right: 4rpx; */
 }
 
 /* 调整上方标题样式 */
@@ -465,5 +443,9 @@ onUnmounted(() => {
 /* 增加分隔线的间距 */
 .divider {
   margin: 80rpx 0;
+}
+.top-clock .flip-items .inner{
+	font-size: 62rpx;
+	color: #593792;
 }
 </style>

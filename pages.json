@@ -6,6 +6,21 @@
 				"navigationBarTitleText": "uni-app",
 				 "navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/diary/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				 "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/writeDiary/index",
+			"style": {
+				"navigationBarTitleText": "写日记",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"globalStyle": {
