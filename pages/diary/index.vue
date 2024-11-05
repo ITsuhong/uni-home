@@ -1,6 +1,6 @@
-<script>
+<script setup>
 	const handleOptionClick=()=>{
-		console.log("1233");
+		console.log('1323');
 		uni.navigateTo({
 			url:"/pages/writeDiary/index"
 		})
@@ -14,8 +14,8 @@
 		<view class="w-full h-28"></view>
 		<image src="@/static/images/girls.png" class="-translate-x-6"></image>
 		<image src="@/static/images/boys.png" class="translate-x-14 mt-3"></image>
-		<view class="flex justify-center mt-8" @click="handleOptionClick">
-			<view class="btn-donate">写日记</view>
+		<view class="flex justify-center mt-8" @click="handleOptionClick" >
+			<view class="btn-donate" >写日记</view>
 		</view>
 	</view>
 </template>

@@ -12,9 +12,6 @@
 	import dayjs from 'dayjs'
 	const lunar = ref('')
 	const txt = ref('')
-	onLoad(() => {
-		const d = lunisolar()
-	})
 </script>
 
 <template>
@@ -27,7 +24,7 @@
 		<textarea placeholder="日记内容" style="height: 800rpx;" :maxlength="0" class="textarea" v-model="txt"></textarea>
 	</view>
 	<view class="mt-12 px-3">
-		<view class="w-full flex justify-center bg-[#201615] rounded-md py-2 text-white">提交保存</view>
+		<view class="w-full flex justify-center bg-[#201615] rounded-md py-3 text-white">提交保存</view>
 	</view>
 </template>
 
