@@ -41,7 +41,7 @@
 					</view>
 				</view>
 				<view class="w-[49%] flex flex-col">
-					<view class="cusbg2 bg-opacity-20 flex-1 mb-2 rounded-lg p-4">
+					<view class="cusbg2 bg-opacity-20 flex-1 mb-2 rounded-lg p-4" @click="hanleOptionToUrl('/pages/albumSet/index')">
 						<view class="font-bold text-[40rpx]">珍藏册</view>
 						<view class="text-[#434343] mt-2 text-[24rpx]">记忆都在这里</view>
 					</view>

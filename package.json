@@ -24,6 +24,7 @@
     "weapp-tailwindcss": "^3.5.3"
   },
   "dependencies": {
+    "@dcloudio/uni-ui": "^1.5.7",
     "dayjs": "^1.11.13",
     "lunisolar": "^2.5.1"
   }

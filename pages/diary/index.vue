@@ -5,6 +5,11 @@
 			url:"/pages/writeDiary/index"
 		})
 	}
+	const haneleOptionList=()=>{
+		uni.navigateTo({
+			url:"/pages/diaryList/index"
+		})
+	}
 </script>
 
 
@@ -12,9 +17,9 @@
 	<image class="absolute h-screen w-screen z-0" src="@/static/images/diary_bg.jpg"></image>
 	<view class="relative z-10">
 		<view class="w-full h-28"></view>
-		<image src="@/static/images/girls.png" class="-translate-x-6"></image>
-		<image src="@/static/images/boys.png" class="translate-x-14 mt-3"></image>
-		<view class="flex justify-center mt-8" @click="handleOptionClick" >
+		<image @click="haneleOptionList('1')" src="@/static/images/girls.png" class="-translate-x-6"></image>
+		<image @click="haneleOptionList('2')" src="@/static/images/boys.png" class="translate-x-14 mt-3"></image>
+		<view class="flex justify-center mt-8" @click="handleOptionClick">
 			<view class="btn-donate" >写日记</view>
 		</view>
 	</view>
