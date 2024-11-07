@@ -1,5 +1,6 @@
 import App from './App'
-
+import * as Pinia from 'pinia';
+import piniaLoading from '@/stores/pinia-loading.js'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
@@ -14,8 +15,12 @@ app.$mount()
 import { createSSRApp } from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
+  const pinia = Pinia.createPinia()
+   pinia.use(piniaLoading)
+  app.use(pinia);
   return {
-    app
+    app,
+    Pinia
   }
 }
 // #endif

@@ -25,7 +25,9 @@
   },
   "dependencies": {
     "@dcloudio/uni-ui": "^1.5.7",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "lunisolar": "^2.5.1"
+    "lunisolar": "^2.5.1",
+    "pinia": "^2.2.6"
   }
 }

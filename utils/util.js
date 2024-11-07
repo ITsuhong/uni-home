@@ -15,17 +15,19 @@ import duoyun from "@/static/images/weather/duoyun.png"
 import xiayu from "@/static/images/weather/xiayu.png"
 import xiaxue from "@/static/images/weather/xiaxue.png"
 
-export const getWeek = () => {
+export const getWeek = (date) => {
+	
 	const weeks = {
-		0: "一",
-		1: "二",
-		2: "三",
-		3: "四",
-		4: "五",
-		5: "六",
-		6: "七"
+		1: "一",
+		2: "二",
+		3: "三",
+		4: "四",
+		5: "五",
+		6: "六",
+		7: "七"
 	}
-	return weeks[dayjs().format('d')]
+	
+	return weeks[dayjs(date).format('d')]
 }
 
 export const moodList = [{
