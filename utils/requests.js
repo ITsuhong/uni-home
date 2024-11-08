@@ -3,8 +3,9 @@ import useUserStore from '@/stores/user';
 import CryptoJS from 'crypto-js';
 
 const DEV_HOST = 'http://123.56.104.248:3000';
+// const DEV_HOST = 'http://localhost:3000';
 // const DEV_HOST = 'https://api.xuequbaike.com/mini/';
-const PROD_HOST = 'https://api.xuequbaike.com/mini/';
+const PROD_HOST = 'http://123.56.104.248:3000';
 // const PROD_HOST = 'https://dev.xuequbaike.com/mini/';
 const cyp_iv = CryptoJS.enc.Base64.parse('kT+uMuPwUk2LH4cFbK0GiA==');
 const cyp_key = CryptoJS.enc.Hex.parse('6476b3f5ec6dcaddb637e9c9654aa698');

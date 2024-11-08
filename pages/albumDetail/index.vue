@@ -2,29 +2,108 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		getSuffix,
+		randomString
+	} from "@/utils/util.js"
+	import {
+		createPhotos,
+		findPhotos
+	} from "@/api/album.js"
+	import {
+		onLoad
+	} from "@dcloudio/uni-app"
+	const PROD_HOST = 'http://123.56.104.248:3000';
+	const DEV_HOST = 'http://localhost:3000';
+	const paths = ref("")
+	const album_id = ref()
+	const images = ref([])
+	const getList = async () => {
+		const res = await findPhotos({
+			album_id: album_id.value
+		})
+		images.value = res.data.map(item => {
+			return (process.env.NODE_ENV === 'production' ? PROD_HOST : DEV_HOST) + item.url
+		})
+	}
+	const hanleOptionChoice = () => {
+		console.log("点击");
+		uni.chooseImage({
+			success: function(res) {
+				upload(res.tempFilePaths)
+				// console.log(res.tempFilePaths);
+				// const path = res.tempFilePaths[0]
+				// const fileName = `${randomString(10)}${getSuffix(path)}`;
+				// uni.uploadFile({
+				// 	url: 'http://localhost:3000/upload', //仅为示例，非真实的接口地址
+				// 	filePath: path,
+				// 	name: 'file',
+				// 	formData: {
+				// 		key: fileName
+				// 	},
+				// 	success: (uploadFileRes) => {
+				// 		console.log(uploadFileRes.data,11);
+				// 	}
+				// });
+			}
+		})
+	}
+	const upload = (files) => {
+		uni.showLoading({
+			title: '上传中...',
+			mask: true
+		});
+		const promiseArr = files.map(item => {
+			return new Promise((resolve, reject) => {
+				const fileName = `${randomString(10)}${getSuffix(item)}`;
+				uni.uploadFile({
+					url: (process.env.NODE_ENV === 'production' ? PROD_HOST : DEV_HOST) +
+						'/upload', //仅为示例，非真实的接口地址
+					filePath: item,
+					name: 'file',
+					formData: {
+						key: fileName
+					},
+					success: (uploadFileRes) => {
+						const url = '/static/' + fileName
+						return resolve(url)
+					}
+				});
+			})
+		})
+		Promise.all(promiseArr.filter(r => r)).then(async (res) => {
 
-	const images = ref([
-		'https://fakeimg.pl/350x400/?text=World&font=lobster',
-		'https://fakeimg.pl/350x250/?text=World&font=lobster',
-		'https://fakeimg.pl/350x300/?text=World&font=lobster',
-		'https://fakeimg.pl/350x450/?text=World&font=lobster',
-		'https://fakeimg.pl/350x280/?text=World&font=lobster',
-		'https://fakeimg.pl/350x320/?text=World&font=lobster',
-		'https://fakeimg.pl/350x380/?text=World&font=lobster',
-		'https://fakeimg.pl/350x420/?text=World&font=lobster',
-		'https://fakeimg.pl/350x360/?text=World&font=lobster'
-	])
+			console.log(res, "数据");
+			paths.value = res.join(",")
+			await createPhotos({
+				album_id: album_id.value,
+				paths: paths.value
+			})
+			uni.hideLoading();
+			getList();
+		})
+	}
+	const hanleOptionPre = (i) => {
+		uni.previewImage({
+			urls: images.value,
+			current: i
+		})
+	}
+	onLoad((options) => {
+		album_id.value = Number(options?.id)
+		getList()
+	})
 </script>
 
 <template>
 	<view class="page-container">
 		<view class="waterfall-container">
 			<view class="waterfall-item" v-for="(img, index) in images" :key="index">
-				<image :src="img" :alt="`图片${index + 1}`" mode="widthFix" />
+				<image @click="hanleOptionPre(index)" :src="img" :alt="`图片${index + 1}`" mode="widthFix" />
 			</view>
 		</view>
 	</view>
-	<uni-fab :popMenu="false" horizontal="right"></uni-fab>
+	<uni-fab @fabClick="hanleOptionChoice" :popMenu="false" horizontal="right"></uni-fab>
 </template>
 
 <style scoped>
