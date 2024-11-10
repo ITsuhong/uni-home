@@ -33,7 +33,7 @@
 				<view class="text-[#999999] text-[24rpx]">{{weatherList.find(item=>item.value==data?.weather)?.name}}</view>
 			</view>
 		</view>
-		<view class="mt-4 text-[#555555] leading-6">
+		<view class="mt-4 text-[#555555] leading-6 whitespace-pre-wrap">
 			{{data?.content}}
 		</view>
 

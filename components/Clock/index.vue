@@ -6,7 +6,7 @@ const daysArr = ref([]) // 只存储天数
 
 // 计算已经过去的时间
 const getTimeStr = () => {
-  const startTime = new Date('2023-12-01 00:00:00').getTime() // 设置起始时间
+  const startTime = new Date('2024-11-04 00:00:00').getTime() // 设置起始时间
   const now = new Date().getTime()
   const diff = now - startTime
 
@@ -84,7 +84,7 @@ onUnmounted(() => {
   
 
     <!-- 下方显示完整时间 -->
-    <view class="title">距离2023年12月1日已经过去</view>
+    <view class="title">距离2024年11月4日已经过去</view>
     <view class="clock-container">
       <view class="flip-container horizontal">
         <!-- 原有的完整时间显示，添加 horizontal 类 -->

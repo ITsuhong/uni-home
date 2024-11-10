@@ -14,7 +14,8 @@
 		onLoad
 	} from "@dcloudio/uni-app"
 	const PROD_HOST = 'http://123.56.104.248:3000';
-	const DEV_HOST = 'http://localhost:3000';
+	// const DEV_HOST = 'http://localhost:4000';
+	const HOST = 'http://123.56.104.248:4000';
 	const paths = ref("")
 	const album_id = ref()
 	const images = ref([])
@@ -23,7 +24,7 @@
 			album_id: album_id.value
 		})
 		images.value = res.data.map(item => {
-			return (process.env.NODE_ENV === 'production' ? PROD_HOST : DEV_HOST) + item.url
+			return HOST + item.url
 		})
 	}
 	const hanleOptionChoice = () => {
@@ -57,7 +58,7 @@
 			return new Promise((resolve, reject) => {
 				const fileName = `${randomString(10)}${getSuffix(item)}`;
 				uni.uploadFile({
-					url: (process.env.NODE_ENV === 'production' ? PROD_HOST : DEV_HOST) +
+					url: HOST +
 						'/upload', //仅为示例，非真实的接口地址
 					filePath: item,
 					name: 'file',
@@ -80,8 +81,11 @@
 				paths: paths.value
 			})
 			uni.hideLoading();
+			
+		}).finally(()=>{
 			getList();
 		})
+		
 	}
 	const hanleOptionPre = (i) => {
 		uni.previewImage({

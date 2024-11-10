@@ -10,8 +10,8 @@
 	import {
 		onLoad
 	} from "@dcloudio/uni-app"
-	const PROD_HOST = 'http://123.56.104.248:3000';
-	const DEV_HOST = 'http://localhost:3000';
+	const HOST = 'http://123.56.104.248:4000';
+	// const DEV_HOST = 'http://localhost:3000';
 	const popup = ref()
 	const hanleOptionCreate = () => {
 		popup.value?.open()
@@ -58,7 +58,7 @@
 			<template v-for="item in list" :key="item.id">
 				<view @click="handleOptionDetail(item)" class="w-42 bg-white rounded-lg pb-1">
 					<image class="w-full h-32 rounded-t-lg" mode="aspectFill"
-						:src="item.photos.length?url+ item.photos[0].url:'https://cdn.xuequbaike.com/upload/school-default.png'">
+						:src="item.photos.length?HOST+ item.photos[0].url:'https://cdn.xuequbaike.com/upload/school-default.png'">
 					</image>
 					<view class="flex justify-between px-2">
 						<view>{{item.name}}</view>

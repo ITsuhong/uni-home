@@ -7,7 +7,7 @@
 	import {
 		getWeek
 	} from "@/utils/util"
-	import {onLoad} from "@dcloudio/uni-app"
+	import {onLoad,onShareAppMessage,onShareTimeline} from "@dcloudio/uni-app"
 	import {ref} from "vue"
 	import {getDetail} from "@/api/diary.js"
 	import {createComment,getComment} from "@/api/comment.js"
@@ -24,6 +24,7 @@
 		}
 		await createComment({diary_id:diary_id.value,content:content.value})
 		getCommentList();
+		content.value=""
 	}
 	const getCommentList=async ()=>{
 		const res=await getComment({diary_id:diary_id.value})
@@ -36,7 +37,16 @@
 		data.value=res.data
 		getCommentList();
 	})
-	
+	onShareAppMessage(()=>{
+		return{
+			title:"胡胖胖之家"
+		}
+	})
+	onShareTimeline(()=>{
+		return{
+			title:"胡胖胖之家"
+		}
+	})
 </script>
 
 <template>
@@ -57,7 +67,7 @@
 				<view class="text-[#999999] text-[24rpx]">{{weatherList.find(item=>item.value==data?.weather)?.name}}</view>
 			</view>
 		</view>
-		<view class="mt-4 text-[#555555] leading-6">
+		<view class="mt-4 text-[#555555] leading-6 whitespace-pre-wrap">
 			{{data?.content}}
 		</view>
 	
@@ -65,7 +75,7 @@
 	<view class="mt-12 px-3">
 		<template v-for="item in commentList" :key="item.id">
 			<view class="flex mt-3">
-				<image class="rounded-sm w-8 h-9 mr-2" src="https://fakeimg.pl/350x200/?text=Hello"></image>
+				<image mode="aspectFill" class="rounded-md w-10 h-10 mr-2" :src="item.user.header_url"></image>
 				<view class="flex-1">
 					<view class="w-full flex justify-between text-[24rpx] text-[#999999]">
 						<view>{{item.user.name}}</view>
