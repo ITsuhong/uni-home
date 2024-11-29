@@ -1,9 +1,15 @@
 <script setup>
 	const handleOptionClick=()=>{
 		console.log('1323');
-		uni.navigateTo({
-			url:"/pages/writeDiary/index"
+		uni.requestSubscribeMessage({
+			tmplIds:["qK3EqV3mLANtXs-vFpVlfBS31XL86CK8dKf8PEOHoIw"],
+			complete:()=>{
+				uni.navigateTo({
+					url:"/pages/writeDiary/index"
+				})
+			}
 		})
+		
 	}
 	const haneleOptionList=(type)=>{
 		uni.navigateTo({

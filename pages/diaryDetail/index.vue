@@ -47,6 +47,12 @@
 			title:"胡胖胖之家"
 		}
 	})
+	const hanleOptionPre=(i)=>{
+		uni.previewImage({
+			urls: data.value?.imageList.split(','),
+			current: i
+		})
+	}
 </script>
 
 <template>
@@ -67,9 +73,12 @@
 				<view class="text-[#999999] text-[24rpx]">{{weatherList.find(item=>item.value==data?.weather)?.name}}</view>
 			</view>
 		</view>
-		<view class="mt-4 text-[#555555] leading-6 whitespace-pre-wrap">
+		<view class="mt-4 text-[#555555] leading-6 whitespace-pre-wrap mb-2">
 			{{data?.content}}
 		</view>
+		<template v-for="(item,index) in data?.imageList?.split(',')">
+			<image @click="hanleOptionPre(index)" :src="item" class="w-full" mode="widthFix"></image>
+		</template>
 	
 	</view>
 	<view class="mt-12 px-3">
@@ -86,6 +95,7 @@
 			</view>
 		</template>
 	</view>
+	<view class="h-44 w-full"></view>
 	<view class="mt-12 bg-[#F5F7FA] py-3 fixed bottom-0 left-0 right-0">
 		<view class="p-3 bg-white mx-3 mt-18 rounded-md">
 			<textarea  style="height: 100rpx;" :maxlength="0" v-model="content" placeholder="留下你的留言"></textarea>

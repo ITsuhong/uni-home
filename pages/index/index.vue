@@ -72,9 +72,11 @@
 						<view class="font-bold text-[40rpx]">珍藏册</view>
 						<view class="text-[#434343] mt-2 text-[24rpx]">记忆都在这里</view>
 					</view>
-					<view class="cusbg3  flex-1 rounded-lg p-4">
-						<view class="font-bold text-[40rpx]">礼物柜</view>
-						<view class="text-[#434343] mt-2 text-[24rpx]">收到的礼物记录一下</view>
+					<view class="cusbg3  flex-1 rounded-lg p-4"
+					@click="hanleOptionToUrl('/pages/movie/index')"
+					>
+						<view class="font-bold text-[40rpx]">影视大全</view>
+						<view class="text-[#434343] mt-2 text-[24rpx]">好看的的都在这里</view>
 					</view>
 				</view>
 			</view>

@@ -32,20 +32,6 @@
 		uni.chooseImage({
 			success: function(res) {
 				upload(res.tempFilePaths)
-				// console.log(res.tempFilePaths);
-				// const path = res.tempFilePaths[0]
-				// const fileName = `${randomString(10)}${getSuffix(path)}`;
-				// uni.uploadFile({
-				// 	url: 'http://localhost:3000/upload', //仅为示例，非真实的接口地址
-				// 	filePath: path,
-				// 	name: 'file',
-				// 	formData: {
-				// 		key: fileName
-				// 	},
-				// 	success: (uploadFileRes) => {
-				// 		console.log(uploadFileRes.data,11);
-				// 	}
-				// });
 			}
 		})
 	}

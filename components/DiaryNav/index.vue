@@ -36,6 +36,17 @@
 		<view class="mt-4 text-[#555555] leading-6 whitespace-pre-wrap">
 			{{data?.content}}
 		</view>
+		<view class="grid grid-cols-3 gap-2 mt-3">
+			<template v-for="item in data?.imageList?.split(',')">
+				<image :src="item" class="w-full h-28 rounded-md" mode="aspectFill"></image>
+			</template>
+		</view>
+		<view class="flex justify-end"> 
+			<view class="flex items-center text-[#989AA0]">
+				<uni-icons type="chat" color="#989AA0"></uni-icons>
+				<view class="text-sm ml-1">{{data?.comments?.length}}</view>
+			</view>
+		</view>
 
 	</view>
 </template>

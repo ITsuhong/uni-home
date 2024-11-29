@@ -19,12 +19,18 @@
 	import {
 		createDiary
 	} from "@/api/diary.js"
+	import {
+		getSuffix,
+		randomString
+	} from "@/utils/util.js"
+	const HOST = 'http://123.56.104.248:4000';
 	const lunar = ref('')
 	const popupmood = ref();
 	const popupweather = ref();
 	const content = ref('')
 	const selectMood = ref('')
 	const selectWeather = ref('')
+	const images = ref([])
 	const hanleOptionClick = (action) => {
 		switch (action) {
 			case 'mood':
@@ -66,20 +72,70 @@
 			})
 			return popupweather.value?.open()
 		}
-		const res=await createDiary({
+		const res = await createDiary({
 			content: content.value,
 			mood: selectMood.value,
-			weather: selectWeather.value
+			weather: selectWeather.value,
+			imageList: images.value.join(",")
 		});
-		if(res.code==200){
+		if (res.code == 200) {
 			uni.showToast({
-				title:"操作成功"
+				title: "操作成功"
 			})
-			setTimeout(()=>{
+			setTimeout(() => {
 				uni.navigateBack()
-			},1500)
+			}, 1500)
 		}
 		console.log(res);
+	}
+	const hanleOptionUpload = () => {
+		console.log("点击");
+		uni.chooseImage({
+			success: function(res) {
+				upload(res.tempFilePaths)
+			}
+		})
+	}
+	const upload = (files) => {
+		uni.showLoading({
+			title: '上传中...',
+			mask: true
+		});
+		const promiseArr = files.map(item => {
+			return new Promise((resolve, reject) => {
+				const fileName = `${randomString(10)}${getSuffix(item)}`;
+				uni.uploadFile({
+					url: HOST +
+						'/upload', //仅为示例，非真实的接口地址
+					filePath: item,
+					name: 'file',
+					formData: {
+						key: fileName
+					},
+					success: (uploadFileRes) => {
+						const url = '/static/' + fileName
+						return resolve(url)
+					}
+				});
+			})
+		})
+		Promise.all(promiseArr.filter(r => r)).then(async (res) => {
+			const paths = res.map(item => HOST + item)
+			images.value = images.value.concat(...paths)
+
+			uni.hideLoading();
+		})
+
+	}
+	const hanleOptionPre = (i) => {
+		console.log(images.value);
+		uni.previewImage({
+			urls: images.value,
+			current: i
+		})
+	}
+	const handleOptionDelete=(i)=>{
+		images.value.splice(i,1)
 	}
 </script>
 
@@ -110,8 +166,28 @@
 		</view>
 	</view>
 	<view class="p-3 bg-[#f9f9f9]">
-		<textarea placeholder="日记内容" style="height: 800rpx;" :maxlength="0" class="textarea"
+		<textarea placeholder="日记内容" style="height: 600rpx;" :maxlength="0" class="textarea"
 			v-model="content"></textarea>
+	</view>
+	<view>
+		<view class="grid grid-cols-3 gap-2 px-3 mt-6">
+			<template v-for="(item,index) in images" :key="item">
+				<view @click="hanleOptionPre(index)"
+					class="bg-[#f9f9f9] h-28 rounded-md flex items-center justify-center relative">
+					<image class="w-full h-28 rounded-md" :src="item" mode="aspectFill"></image>
+					<view @click.stop="handleOptionDelete(index)" class="absolute top-1 right-1">
+						<uni-icons type="clear" size="30"></uni-icons>
+					</view>
+				</view>
+			</template>
+			<view @click="hanleOptionUpload" class="bg-[#f9f9f9] h-28 rounded-md flex items-center justify-center">
+				<view>
+					<uni-icons type="plusempty" size="40" color="#999999"></uni-icons>
+				</view>
+			</view>
+			<!-- <view class="bg-red h-12"></view>
+			<view class="bg-red h-12"></view> -->
+		</view>
 	</view>
 	<view class="mt-12 px-3">
 		<view @click="hanleOptionSave" class="w-full flex justify-center bg-[#201615] rounded-md py-3 text-white">提交保存

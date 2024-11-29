@@ -60,6 +60,22 @@
 				"navigationBarBackgroundColor": "#000000",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/movie/index",
+			"style": {
+				"navigationBarTitleText": "影片",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/movieDetail/index",
+			"style": {
+				"navigationBarTitleText": "影片详情",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"globalStyle": {
