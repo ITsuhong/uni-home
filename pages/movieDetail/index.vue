@@ -10,6 +10,7 @@
 		onLoad
 	} from "@dcloudio/uni-app"
 	const data = ref()
+	const isLoading=ref(true)
 	const labels = ref([])
 	const data_list = ref([])
 	const select_label = ref('')
@@ -25,7 +26,12 @@
 		return list;
 	})
 	const loadeddata=()=>{
+		isLoading.value=false
 		console.log("开始加载");
+	}
+	const hanleOptionCol=(record)=>{
+		isLoading.value=true
+		select_col.value=record
 	}
 	onLoad(async (option) => {
 		const res = await getMovieDetail({
@@ -51,8 +57,11 @@
 </script>
 <template>
 	<view class="p-3">
-		<view v-if="select_col?.fileUrl" class="w-full">
-			<video :play-strategy="1" @loadeddata=loadeddata :src="select_col.fileUrl" style="width: 100%;"></video>
+		<view v-if="select_col?.fileUrl" class="w-full relative">
+			<video :autoplay="true" :play-strategy="1" @loadedmetadata=loadeddata :src="select_col.fileUrl" style="width: 100%;"></video>
+			<view v-if="isLoading" class="absolute left-0 right-0 top-0 bottom-0 bg-black bg-opacity-25 text-white flex justify-center items-center">
+				加载中...
+			</view>
 		</view>
 		<view class="flex">
 			<!-- <image mode="aspectFill" class="h-[400rpx] w-[300rpx] rounded-md" :src="data?.imgUrl"></image> -->
@@ -73,7 +82,7 @@
 
 		<view class="grid grid-cols-3 gap-2 mt-4">
 			<template v-for="item in col_list" :item="item?.id">
-				<view @click="select_col=item" :class="{
+				<view @click="hanleOptionCol(item)" :class="{
 					'border-[2rpx] border-[#3e3f42] max-w-full u-line-1 rounded-md text-white flex justify-center py-2':true,
 					'text-[#d22f28] border-[#d22f28]':select_col.cId==item.cId
 				}">
