@@ -23,6 +23,12 @@
 		const days = Math.floor(diff / (1000 * 60 * 60 * 24))
 		return days
 	})
+	const getToCui=()=>{
+		console.log("哈哈");
+		uni.navigateTo({
+			url:'/pages/cuisine/index'
+		})
+	}
 	onLoad(() => {
 		const {
 			top
@@ -44,6 +50,9 @@
 <template>
 	<image class="absolute h-screen w-screen z-0" src="@/static/images/indexBg.jpg"></image>
 	<view class=" h-screen relative z-10 flex flex-col">
+		<view  class="absolute top-[680rpx] z-[9999] -left-1">
+			<image  @click="hanleOptionToUrl('/pages/cuisine/index')" class="w-[200rpx] h-[200rpx]" src="@/static/images/cai.png"></image>
+		</view>
 		<view class="w-full" :style="{height:topPostion+'px'}"></view>
 		<view class="flex-1 z-10 flex flex-col justify-between">
 			<view>

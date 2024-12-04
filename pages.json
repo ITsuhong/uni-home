@@ -76,6 +76,30 @@
 				"navigationBarBackgroundColor": "#000000",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/cuisine/index",
+			"style": {
+				"navigationBarTitleText": "菜谱",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/cuisineDetail/index",
+			"style": {
+				"navigationBarTitleText": "菜谱详情",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/eatList/index",
+			"style": {
+				"navigationBarTitleText": "想吃",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"globalStyle": {

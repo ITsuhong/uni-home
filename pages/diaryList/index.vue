@@ -31,7 +31,9 @@
 		getList()
 	})
 	onReachBottom(() => {
+		
 		if (pagination.value.pageNum * pagination.value.pageSize < pagination.value.total) {
+			
 			getList(pagination.value.pageNum + 1, 10);
 		}
 	})
