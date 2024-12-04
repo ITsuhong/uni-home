@@ -14,7 +14,7 @@ import yintian from "@/static/images/weather/yintian.png"
 import duoyun from "@/static/images/weather/duoyun.png"
 import xiayu from "@/static/images/weather/xiayu.png"
 import xiaxue from "@/static/images/weather/xiaxue.png"
-
+import Fuse from 'fuse.js'
 export const getWeek = (date) => {
 	
 	const weeks = {
@@ -125,4 +125,44 @@ export const randomString = (len) => {
     pwd += chars.charAt(Math.floor(Math.random() * maxPos));
   }
   return pwd;
+}
+
+
+
+
+
+
+export function getSearchKeywords(str, sampleKeyword) {
+
+  const fuseOptions = {
+    // isCaseSensitive: false,
+    // includeScore: false,
+    // shouldSort: true,
+    // includeMatches: false,
+    // findAllMatches: false,
+    // minMatchCharLength: 2,
+    // location: 0,
+    // threshold: 0.1,
+    // distance: 100,
+    useExtendedSearch: true,
+    // ignoreLocation: false,
+    ignoreFieldNorm: true,
+    fieldNormWeight: 2,
+
+    keys: ['title'],
+    minMatchCharLength: 2,
+    sortFn: (a, b) => {
+      if (a.score === b.score) {
+        // 如果匹配度相同，按字符串长度排序
+        return a.item.length - b.item.length;
+      }
+      // 否则按匹配度排序
+      return a.score - b.score;
+    }
+  };
+  const fuse = new Fuse(sampleKeyword, fuseOptions);
+  const result = fuse.search(str)
+
+
+  return result.map(item => item.item)
 }

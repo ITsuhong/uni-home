@@ -43,10 +43,10 @@
 			type: selectType.value
 		})
 	}
-	
-	const getCount=async ()=>{
-		const res=await getEatList()
-		count.value=res.data.length
+
+	const getCount = async () => {
+		const res = await getEatList()
+		count.value = res.data.length
 	}
 	const handleOptionSelect = (record) => {
 		selectType.value = record
@@ -71,9 +71,14 @@
 		})
 		getCount()
 	}
-	const hanleOptionToUrl=()=>{
+	const hanleOptionToUrl = () => {
 		uni.navigateTo({
-			url:'/pages/eatList/index'
+			url: '/pages/eatList/index'
+		})
+	}
+	const hanleOptionSearch=()=>{
+		uni.navigateTo({
+			url:'/pages/searchCuisine/index'
 		})
 	}
 	onLoad(() => {
@@ -88,21 +93,28 @@
 	})
 </script>
 <template>
-	<view class="grid grid-cols-8 gap-1 p-3 sticky top-0 bg-white z-[999]">
-		<template v-for="item in tabs" :key="item">
-			<view @click="handleOptionSelect(item)" :class="{
-				'flex justify-center rounded-md text-sm ':true,
-				'text-red':selectType==item
-			}">{{item}}</view>
-		</template>
+	<view class="p-3 sticky top-0 bg-white z-[999]">
+		<view @click="hanleOptionSearch">
+			<uni-search-bar placeholder="搜索" :readonly="true">
+			</uni-search-bar>
+		</view>
+		<view class="grid grid-cols-8 gap-1 ">
+			<template v-for="item in tabs" :key="item">
+				<view @click="handleOptionSelect(item)" :class="{
+					'flex justify-center rounded-md text-sm ':true,
+					'text-red':selectType==item
+				}">{{item}}</view>
+			</template>
+		</view>
 	</view>
+
 	<view class="p-3 relative">
 		<view class="fixed top-1/2 z-[9999] -right-0 ">
 			<view
 				class="absolute top-1 right-2 flex items-center justify-center text-white text-sm w-[45rpx] h-[45rpx] bg-red rounded-full">
-				{{count}}</view>
-			<image @click="hanleOptionToUrl()" class="w-[150rpx] h-[150rpx]"
-				src="@/static/images/eat.png"></image>
+				{{count}}
+			</view>
+			<image @click="hanleOptionToUrl()" class="w-[150rpx] h-[150rpx]" src="@/static/images/eat.png"></image>
 
 		</view>
 		<view class="grid grid-cols-2 gap-4">

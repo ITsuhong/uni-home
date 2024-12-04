@@ -15,3 +15,10 @@ export const setIsEat=(data)=>{
 export const getEatList=(data)=>{
 	return Request('/cuisine/eat/list', data);
 }
+export const getAll=(data)=>{
+	return Request('/cuisine/all', data);
+}
+
+export const getWord=(data)=>{
+	return Request('/cuisine/word/list', data);
+}

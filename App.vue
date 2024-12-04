@@ -4,11 +4,14 @@
 		onShow,
 		onHide
 	} from "@dcloudio/uni-app"
+	import useCuisineStore from "@/stores/cuisine.js"
 	import useUserStore from "@/stores/user.js"
 	const userStore = useUserStore()
+	const cuisineStore = useCuisineStore()
 	onLaunch(async () => {
 		console.log(userStore);
 		await userStore.login()
+		cuisineStore.getAll()
 
 		// userStore.login()
 	})
